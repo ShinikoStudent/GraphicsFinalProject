@@ -9,7 +9,7 @@ function main(){
     if (!gl){
     return;
     }
-
+    
     // Vertices for triangle
     var vertices = [-0.5, 0.5, 0.0, 0.0, 0.5, 0.5];
 
@@ -88,4 +88,4 @@ function main(){
 
     // Draw the triangle
     gl.drawArrays(gl.TRIANGLES, 0, 3);
-}
+}   
