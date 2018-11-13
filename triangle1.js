@@ -1,64 +1,48 @@
-main();
+var positionTriangle1 = {x: 0.0, y: 0.0};
+var vertex_buffer1;
+T1main();
 
-function main(){
+function T1main(){
     // Prep the canvas for WebGL use
-    const canvas = document.getElementById('canvas');
-    const gl = canvas.getContext('webgl')
+    //var canvas = document.getElementById('canvas');
+    //var gl = canvas.getContext('webgl')
 
     // Check that WebGL is possible
     if (!gl){
     return;
     }
     
-    // Vertices for triangle
-    var vertices = [-0.5, 0.5, 0.0, 0.0, 0.5, 0.5];
+    /* == Defining and storing the geometry == */
+    var vertices = [-0.5, 0.5, 0.0, 0.0, 0.5, 0.5];// Vertices for triangle
 
-    // Create a new buffer object
-    var vertex_buffer = gl.createBuffer();
-
-    // Bind an empty array buffer to it
-    gl.bindBuffer(gl.ARRAY_BUFFER, vertex_buffer);
-
-    // Pass the vertices data to the buffer
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
-
-    // Unbind the buffer
-    gl.bindBuffer(gl.ARRAY_BUFFER, null);
-
+    /* == Bind buffers  == */
+    var vertex_buffer1 = gl.createBuffer();// Create a new buffer object
+    gl.bindBuffer(gl.ARRAY_BUFFER, vertex_buffer1);// Bind an empty array buffer to it
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);// Pass the vertices data to the buffer
+    gl.bindBuffer(gl.ARRAY_BUFFER, null);// Unbind the buffer
+    
+    /* == Define Shaders  == */
     // Vertex shader source code
     var vertCode =
-    'attribute vec2 coordinates;' + 
-    'void main(void) {' + ' gl_Position = vec4(coordinates,0.0, 1.0);' + '}';
-
-    //Create a vertex shader object
-    var vertShader = gl.createShader(gl.VERTEX_SHADER);
-
-    //Attach vertex shader source code
-    gl.shaderSource(vertShader, vertCode);
-
-    //Compile the vertex shader
-    gl.compileShader(vertShader);
+        'attribute vec4 coordinates;' + 
+        'uniform vec4 translation;'+
+        'void main(void) {' +
+        '  gl_Position = coordinates + translation;' +
+        '}';
+    var vertShader = gl.createShader(gl.VERTEX_SHADER);// Create a vertex shader object
+    gl.shaderSource(vertShader, vertCode);// Attach vertex shader source code
+    gl.compileShader(vertShader);//Compile the vertex shader
 
     //Fragment shader source code
     var fragCode = 'void main(void) {' + 'gl_FragColor = vec4(0.0, 0.0, 0.0, 0.1);' + '}';
+    var fragShader = gl.createShader(gl.FRAGMENT_SHADER);// Create fragment shader object
+    gl.shaderSource(fragShader, fragCode);// Attach fragment shader source code
+    gl.compileShader(fragShader);// Compile the fragment shader
 
-    // Create fragment shader object
-    var fragShader = gl.createShader(gl.FRAGMENT_SHADER);
-
-    // Attach fragment shader source code
-    gl.shaderSource(fragShader, fragCode);
-
-    // Compile the fragment shader
-    gl.compileShader(fragShader);
-
-    // Create a shader program object to store combined shader program
-    var shaderProgram = gl.createProgram();
-
-    // Attach a vertex shader
-    gl.attachShader(shaderProgram, vertShader); 
-
-    // Attach a fragment shader
-    gl.attachShader(shaderProgram, fragShader);
+    /* == Create a shader program object to store combined shader program == */
+    // var shaderProgram = gl.createProgram();
+    gl.attachShader(shaderProgram, vertShader);// Attach a vertex shader
+    gl.attachShader(shaderProgram, fragShader);// Attach a fragment shader
 
     // Link both programs
     gl.linkProgram(shaderProgram);
@@ -66,8 +50,8 @@ function main(){
     // Use the combined shader program object
     gl.useProgram(shaderProgram);
 
-    //Bind vertex buffer object
-    gl.bindBuffer(gl.ARRAY_BUFFER, vertex_buffer);
+    // Bind vertex buffer object
+    gl.bindBuffer(gl.ARRAY_BUFFER, vertex_buffer1);
 
     //Get the attribute location
     var coord = gl.getAttribLocation(shaderProgram, "coordinates");
@@ -77,15 +61,22 @@ function main(){
 
     //Enable the attribute
     gl.enableVertexAttribArray(coord);
+    
+    draw();
+    
+}
 
-    // Set clear color to black, fully opaque
-    gl.clearColor(0.0, 0.0, 1.0, 1.0);
-    // Clear the color buffer with specified clear color
-    gl.clear(gl.COLOR_BUFFER_BIT);
+function updateDrawing(){
+    gl.bindBuffer(gl.ARRAY_BUFFER, vertex_buffer1);
+    var translation = gl.getUniformLocation(shaderProgram, 'translation');
+    gl.uniform4f(translation, positionTriangle1.x, positionTriangle1.y, 0.0, 0.0);
+    //gl.bindBuffer(gl.ARRAY_BUFFER, null);
+    draw();
+}
 
-    // Set the view port
-    gl.viewport(0,0,canvas.width,canvas.height);
-
+function draw(){
+    gl.bindBuffer(gl.ARRAY_BUFFER, vertex_buffer1);
     // Draw the triangle
     gl.drawArrays(gl.TRIANGLES, 0, 3);
-}   
+    //gl.bindBuffer(gl.ARRAY_BUFFER, null);
+}

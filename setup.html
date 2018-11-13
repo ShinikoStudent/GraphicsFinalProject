@@ -13,12 +13,30 @@
     <body>
         <h1>Final Project Graphics</h1>
         <canvas width = "1000" height = "600" id = "canvas"></canvas>
+        <script type="text/javascript">
+            var canvas = document.getElementById('canvas');
+            var gl = canvas.getContext('webgl');
+            
+            var shaderProgram = gl.createProgram();
+            
+            // Set clear color to black, fully opaque
+            gl.clearColor(0.0, 0.0, 1.0, 1.0);
+            
+            // Clear the color buffer with specified clear color
+            gl.clear(gl.COLOR_BUFFER_BIT);
+            
+            // Set the view port
+            gl.viewport(0,0,canvas.width,canvas.height);
+        </script>
     </body>
     
     <!-- The first source will determine the color and viewports 
         Add in other .js files after that that mimic triangle2.js --> 
-    <script src="triangle1.js" ></script> 
+    
+    
     <script src="triangle2.js"></script>
-    <script src="Grass.js" ></script> 
-    <script src="Grass2.js"></script>
+    <script src="triangle1.js" ></script> 
+    <script src="controller.js"></script>
+    <!--<script src="Grass.js" ></script> 
+    <script src="Grass2.js"></script>-->
 </html>
