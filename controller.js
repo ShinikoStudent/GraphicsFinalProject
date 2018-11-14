@@ -1,5 +1,4 @@
 window.addEventListener("keydown", moveSomething, false);
-//setInterval(redraw(), 500);
 
 function moveSomething(e) {
     switch(e.key) {
@@ -29,7 +28,8 @@ function redraw(){
     // Clear the color buffer with specified clear color
     gl.clear(gl.COLOR_BUFFER_BIT);
     
-    updateDrawing();
-    draw2();
-    //T2main(); // TODO: Needs to not call main!!
+    //updateDrawingT1();
+    drawT1();
+    drawT2();
+    
 }
