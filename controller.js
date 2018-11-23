@@ -3,19 +3,19 @@ window.addEventListener("keydown", moveSomething, false);
 function moveSomething(e) {
     switch(e.key) {
         case 'ArrowLeft':// left key pressed
-            positionTriangle1.x -= .01;
+            triangle1Pos.x -= .01;
             redraw();
             break;
         case 'ArrowUp':// up key pressed
-            positionTriangle1.y +=.01;
+            triangle1Pos.y +=.01;
             redraw();
             break;
         case 'ArrowRight':// right key pressed
-            positionTriangle1.x += .01;
+            triangle1Pos.x += .01;
             redraw();
             break;
         case 'ArrowDown':// down key pressed
-            positionTriangle1.y -= .01;
+            triangle1Pos.y -= .01;
             redraw();
             break;  
     }   

@@ -1,8 +1,8 @@
 <!doctype html>
 <!-- 
-* Title:            WebGL Final Project Lab
-* Authors:          WebGL Team
-* File Description: Set up HTML page and call all .js files associated.
+* Title:        WebGL Final Project Lab
+* Authors:      WebGL Team
+* Description:  Set up HTML page and call all .js files associated.
 *
 -->
 <html>
@@ -10,18 +10,20 @@
         <title>Final Project</title>
     </head>
     
-    <body>
-        <h1>Final Project Graphics</h1>
+    <body align="center";>
+        <!--Define title page and canvas to be used for WebGL-->
+        <h1>WebGL Lab</h1>
         <canvas width = "1000" height = "600" id = "canvas"></canvas>
+        
+        <!--Define setup for WebGL.-->
         <script type="text/javascript">
             var canvas = document.getElementById('canvas');
-            var gl = canvas.getContext('webgl');
+            var gl = canvas.getContext('webgl');// Use WebGL for graphics
             
-            var shaderProgram = gl.createProgram();
+            var shaderProgram = gl.createProgram();// Create a shader program object to store combined shader program
             
             /* == Define Shaders  == */
-            // Vertex shader source code
-            var vertCode =
+            var vertCode =// Vertex shader source code
                 'attribute vec4 coordinates;' + 
                 'attribute vec3 color;' +
                 'varying vec3 vColor;' +
@@ -33,19 +35,17 @@
             var vertShader = gl.createShader(gl.VERTEX_SHADER);// Create a vertex shader object
             gl.shaderSource(vertShader, vertCode);// Attach vertex shader source code
             gl.compileShader(vertShader);//Compile the vertex shader
-
-            //Fragment shader source code
-            var fragCode = 
+            
+            var fragCode = //Fragment shader source code
                 'precision mediump float;' +
                 'varying vec3 vColor;' +
                 'void main(void) {' +
-                'gl_FragColor = vec4(0.0, 0.0, 0.0, 0.1);' + '}';
+                'gl_FragColor = vec4(vColor, 1.0);' + '}';
             var fragShader = gl.createShader(gl.FRAGMENT_SHADER);// Create fragment shader object
             gl.shaderSource(fragShader, fragCode);// Attach fragment shader source code
             gl.compileShader(fragShader);// Compile the fragment shader
 
-            /* == Create a shader program object to store combined shader program == */
-            // var shaderProgram = gl.createProgram();
+            /* == Attach vertex and fragment shaders == */
             gl.attachShader(shaderProgram, vertShader);// Attach a vertex shader
             gl.attachShader(shaderProgram, fragShader);// Attach a fragment shader
 
@@ -66,18 +66,14 @@
         </script>
     </body>
     
-    <!-- The first source will determine the color and viewports 
-        Add in other .js files after that that mimic triangle2.js 
-		
-		Comment triangle1.js and triangle2.js out and uncomment quad1.js to generate square.
-		--> 
-    
-    
-    <script src="triangle2.js"></script>
-	<script src="quad1.js"></script>
-    <script src="triangle1.js" ></script>
-     <!--<script src="quad1.js" ></script>-->
+    <!--
+    Please note that which ever file is sourced first, is also defined first!
+    -->
+    <script src="triangle1.js"></script>
+    <script src="triangle2.js" ></script>
     <script src="controller.js"></script>
+    <!--<script src="quad1.js"></script>-->
+     <!--<script src="quad1.js" ></script>-->
     <!--<script src="Grass.js" ></script> 
     <script src="Grass2.js"></script>-->
 	
