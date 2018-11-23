@@ -23,16 +23,23 @@
             // Vertex shader source code
             var vertCode =
                 'attribute vec4 coordinates;' + 
+                'attribute vec3 color;' +
+                'varying vec3 vColor;' +
                 'uniform vec4 translation;'+
                 'void main(void) {' +
                 '  gl_Position = coordinates + translation;' +
+                '  vColor = color;' +
                 '}';
             var vertShader = gl.createShader(gl.VERTEX_SHADER);// Create a vertex shader object
             gl.shaderSource(vertShader, vertCode);// Attach vertex shader source code
             gl.compileShader(vertShader);//Compile the vertex shader
 
             //Fragment shader source code
-            var fragCode = 'void main(void) {' + 'gl_FragColor = vec4(0.0, 0.0, 0.0, 0.1);' + '}';
+            var fragCode = 
+                'precision mediump float;' +
+                'varying vec3 vColor;' +
+                'void main(void) {' +
+                'gl_FragColor = vec4(0.0, 0.0, 0.0, 0.1);' + '}';
             var fragShader = gl.createShader(gl.FRAGMENT_SHADER);// Create fragment shader object
             gl.shaderSource(fragShader, fragCode);// Attach fragment shader source code
             gl.compileShader(fragShader);// Compile the fragment shader
@@ -64,7 +71,7 @@
     
     
     <script src="triangle2.js"></script>
-	<!--<script src="quad1.js"></script>-->
+	<script src="quad1.js"></script>
     <script src="triangle1.js" ></script>
     
     <script src="controller.js"></script>
