@@ -7,10 +7,10 @@ main();
          /*========== Defining and storing the geometry =========*/
 
          var vertices = [
-            -0.25,0.25,0.0,
-            -0.25,-0.25,0.0,
-            0.25,-0.25,0.0,
-            0.25,0.25,0.0 
+            -0.20,0.5,0.0,
+            -0.20,-0.5,0.0,
+            0.5,-0.5,0.0,
+            0.5,0.5,0.0 
          ];
 
          indices = [3,2,1,3,1,0];
@@ -60,7 +60,7 @@ main();
          // Fragment shader source code
          var fragCode =
             'void main(void) {' +
-               ' gl_FragColor = vec4(0.0, 1.0, 0.0, 1.0);' +
+               ' gl_FragColor = vec4(0.0, 1.0, 1.0, 1.0);' +
             '}';
 
          // Create fragment shader object 
@@ -121,5 +121,5 @@ main();
 
          // Draw the triangle
          gl.drawElements(gl.TRIANGLES, indices.length, gl.UNSIGNED_SHORT,0);
-
+			
 		 }
