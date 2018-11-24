@@ -1,3 +1,9 @@
+/* 
+* Title:        WebGL Final Project Lab
+* Authors:      WebGL Team
+* Description:  Set up triangle 1 with their draw functions
+*
+*/
 window.addEventListener("keydown", moveSomething, false);
 
 function moveSomething(e) {

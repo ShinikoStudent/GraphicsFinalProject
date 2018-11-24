@@ -1,3 +1,10 @@
+/* 
+* Title:        WebGL Final Project Lab
+* Authors:      WebGL Team
+* Description:  Set up triangle 1 with their draw functions
+*
+*/
+
 /*============ Creating a canvas =================*/
 main();
  function main(){    
@@ -7,8 +14,8 @@ main();
          /*========== Defining and storing the geometry =========*/
 
          var vertices = [
-            -0.20,0.5,0.0,
-            -0.20,-0.5,0.0,
+            -0.5,0.5,0.0,
+            -0.5,-0.5,0.0,
             0.5,-0.5,0.0,
             0.5,0.5,0.0 
          ];
@@ -106,19 +113,6 @@ main();
          gl.enableVertexAttribArray(coord);
 
          /*============= Drawing the Quad ================*/
-
-         // Clear the canvas
-         /*gl.clearColor(0.5, 0.5, 0.5, 0.9);
-
-         // Enable the depth test
-         gl.enable(gl.DEPTH_TEST);
-
-         // Clear the color buffer bit
-         gl.clear(gl.COLOR_BUFFER_BIT);
-
-         // Set the view port
-         gl.viewport(0,0,canvas.width,canvas.height);*/
-
          // Draw the triangle
          gl.drawElements(gl.TRIANGLES, indices.length, gl.UNSIGNED_SHORT,0);
 			
