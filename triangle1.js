@@ -22,8 +22,7 @@ function T1main(){
     }
     
     // Defining the geometry
-    var vertices = [-0.5, 0.5, -0.5, -0.5, 0.5, 0.5];// Vertices for triangle
-    
+    var vertices = [-0.5, 0.5, -0.5, -0.5, 0.5, 0.5];// Vertices for triangle [x1,y1, x2,y2, x3,y3]
     var colors = [1,0,0, 1,0,0, 1, 0, 0];// Color at each vertex [R,G,B, R,G,B, R,G,B]
     
     // Bind vertex buffers 
